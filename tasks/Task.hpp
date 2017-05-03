@@ -4,6 +4,7 @@
 #define READ_JOINT_DISPATCHER_TASK_TASK_HPP
 
 #include "read_joint_dispatcher/TaskBase.hpp"
+#include <joint_dispatcher/Dispatcher.hpp>
 
 namespace read_joint_dispatcher{
 
@@ -27,8 +28,19 @@ By default, it is activated by the dispatches' input ports
     {
 	friend class TaskBase;
     protected:
+        typedef RTT::OutputPort<base::samples::Joints> OutputPort;
+        typedef RTT::InputPort<base::samples::Joints> InputPort;
 
+        std::vector<InputPort*> mInputPorts;
+        std::vector<OutputPort*> mOutputPorts;
 
+        joint_dispatcher::Dispatcher mDispatcher;
+        base::samples::Joints mJoint;
+	
+	std::map<std::string,std::string> jointToStreamMap;
+
+        /** Deletes all defined input and output ports */
+        void clearPorts();
 
     public:
         /** TaskContext constructor for Task
