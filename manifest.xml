@@ -1,0 +1,11 @@
+<package>
+  <description brief="Simplified read_joint_dispatcher for ExoTeR without the need for dynamic ports">
+  Needed for the SARGON project
+  </description>
+  <author>M. Schilling/moritz.schilling@dfki.de</author>
+  <license></license>
+  <url>http://</url>
+  <logo>http://</logo>
+  <depend package="base/cmake" />
+  <depend package="control/joint_dispatcher" />
+</package>

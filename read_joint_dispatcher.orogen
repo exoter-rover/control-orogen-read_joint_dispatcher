@@ -1,0 +1,46 @@
+name "read_joint_dispatcher"
+
+# If new data types need to be defined, they have to be put in a separate C++
+# header, and this header will be loaded here
+import_types_from "read_joint_dispatcherTypes.hpp"
+
+import_types_from 'base'
+using_library 'joint_dispatcher'
+
+# Generic dispatch task for streams of base::samples::Joints
+#
+# By default, it is activated by the dispatches' input ports
+task_context "Task" do
+    # This is the default from now on, and should not be removed. Rock will
+    # transition to a setup where all components use a configuration step.
+    needs_configuration
+
+    # Output configuration
+    #
+    # The component will create the necessary ports at configure time based on
+    # the port names that are listed in this output configuration
+    property "outputs", "std/vector</joint_dispatcher/OutputConfiguration>"
+
+    # Dispatch configuration
+    #
+    # The component will create the necessary ports at configure time based on
+    # the port names that are listed in this dispatch configuration
+    #
+    # The output port names listed here must have a corresponding
+    # OutputConfiguration entry in the outputs property
+    property "dispatches", "std/vector</joint_dispatcher/SingleDispatchConfiguration>"
+    
+    property "defaultConfiguration", "std/vector</joint_dispatcher/DefaultJointConfiguration>"
+ 
+    # Original orogen specifies dynamic ports
+    # For SARGON we need statically defined ports
+
+    # Statically defined inputs
+    input_port "joints_readings", "base/samples/Joints"
+
+    # Statically defined outputs
+    output_port "motors_samples","base/samples/Joints"
+    output_port "joints_samples","base/samples/Joints"
+    output_port "ptu_samples","base/samples/Joints"
+end
+
