@@ -42,5 +42,7 @@ task_context "Task" do
     output_port "motors_samples","base/samples/Joints"
     output_port "joints_samples","base/samples/Joints"
     output_port "ptu_samples","base/samples/Joints"
+
+    port_driven
 end
 
